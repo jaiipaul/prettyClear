@@ -1,3 +1,7 @@
+import os
+import random
+
+
 class Shape:
     def __init__(self, name: str, pattern: str = ''):
         self._name = name
@@ -16,7 +20,19 @@ class Shape:
         self._pattern = pattern
 
     def draw(self):
-        print(self.pattern)
+        pattern_lines = self.pattern.split('\n')
+        line_length = len(pattern_lines[0])+1
+        term_length = os.get_terminal_size().columns
+        n_pattern = random.randint(1, int(term_length/line_length))
+        colors = {f'\033[{random.randint(40, 47)}m'
+                  for _ in range(n_pattern)}
+
+        for p_line in pattern_lines:
+            term_line = ' '
+            for color in colors:
+                cur_line = p_line.replace("x", color+" \033[0m")
+                term_line += cur_line+' '
+            print(term_line)
 
 
 class ShapeRegistry:
