@@ -1,5 +1,6 @@
 import prettyClear.prettyclearer as prettyclearer
 import prettyClear.shapes as shapes
+from prettyClear.terminalcolors import TerminalColors
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
                                                               '  xxx  \n'
                                                               ' xxxxx \n'
                                                               'xxxxxxx')))
+    TerminalColors.bg.register('custom_red', 10, 50, 0)
     clearer.run()
 
 

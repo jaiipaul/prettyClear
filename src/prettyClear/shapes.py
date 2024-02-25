@@ -1,5 +1,6 @@
 import os
 import random
+from prettyClear.terminalcolors import TerminalColors
 
 
 class Shape:
@@ -24,13 +25,13 @@ class Shape:
         line_length = len(pattern_lines[0])+1
         term_length = os.get_terminal_size().columns
         n_pattern = random.randint(1, int(term_length/line_length))
-        colors = {f'\033[{random.randint(40, 47)}m'
-                  for _ in range(n_pattern)}
+        colors = {TerminalColors.bg.random() for _ in range(n_pattern)}
 
         for p_line in pattern_lines:
             term_line = ' '
             for color in colors:
-                cur_line = p_line.replace("x", color+" \033[0m")
+                cur_line = p_line.replace("x",
+                                          color+f" {TerminalColors.reset}")
                 term_line += cur_line+' '
             print(term_line)
 
